@@ -1,0 +1,322 @@
+<div class="container-fluid p-4">
+  <%if(loggedIn){%>
+  <div class="mb-3 w-100 text-center">
+    <button class="btn btn-primary" type="button" id="button-addon2">
+      <a href="/rain-status" class="btn btn-primary text-light"
+        >Check The Rain Prediction for your Pincode</a
+      >
+    </button>
+  </div>
+  <%}%>
+  <div class="m-auto text-center w-50">
+    <%if(error){%>
+    <div class="alert alert-danger"><%=error%></div>
+    <%}%>
+    <form action="/rain-status" method="GET">
+      <div class="input-group mb-3">
+        <span
+          class="input-group-text border border-secondary text-bg-secondary"
+          id="basic-addon1"
+          >Search for any other pincode&nbsp;
+        </span>
+
+        <input
+          type="number"
+          class="form-control border border-secondary"
+          placeholder="Enter Pincode"
+          aria-label="Recipient's username"
+          aria-describedby="button-addon2"
+          name="pincode"
+        />
+        <button
+          class="btn btn-outline-secondary"
+          type="submit"
+          id="button-addon2"
+        >
+          <i class="fas fa-search"></i>
+        </button>
+      </div>
+    </form>
+  </div>
+
+  <div
+    class="card mb-3 <% if (rainWarning.code >= 4) { %> text-bg-danger <% } else if (rainWarning.code >= 2 && rainWarning.code <= 3) { %> text-bg-warning <% } else { %> text-bg-success <% } %>"
+  >
+    <div class="card-header text-center">
+      <% if (rainWarning.code >= 4) { %>
+      <h2>
+        WARNING!!! <%=rainWarning.message%> in <%if(address){%><%=address%><%}%>
+      </h2>
+      <% } else if (rainWarning.code >= 2 && rainWarning.code <= 3) { %>
+      <h2>
+        ALERT!!! <%=rainWarning.message%> in <%if(address){%><%=address%><%}%>
+      </h2>
+      <% } else if(rainWarning.code<=2 && rainWarning.code>=0){%>
+      <h2>
+        SAFE! <%=rainWarning.message%> in <%if(address){%><%=address%><%}%>
+      </h2>
+      <% } %>
+    </div>
+
+    <div class="card-body d-flex flex-column justify-content-evenly gap-3">
+      <h3 class="card-title">
+        <a
+          href="#"
+          class="<% if (rainWarning.code >= 4) { %> text-bg-danger <% } else if (rainWarning.code >= 2 && rainWarning.code <= 3) { %> text-bg-warning <% } else { %> text-bg-success <% }%>"
+        >
+          File a complaint if you are facing any flooding or drainage or any
+          other issues in your area.</a
+        >
+      </h3>
+      <div class="accordion" id="accordionPanelsStayOpenExample">
+        <div class="accordion-item">
+          <h2 class="accordion-header">
+            <button
+              class="accordion-button"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#panelsStayOpen-collapseOne"
+              aria-expanded="true"
+              aria-controls="panelsStayOpen-collapseOne"
+            >
+              <strong>How to prepare for heavy rainfall? </strong>
+            </button>
+          </h2>
+          <div
+            id="panelsStayOpen-collapseOne"
+            class="accordion-collapse collapse show"
+          >
+            <div class="accordion-body">
+              <ul>
+                <li>
+                  Ensure storm drains near your house are clear and free of
+                  debris.
+                </li>
+
+                <li>
+                  Clear eave troughs and ensure they are pointed down and away
+                  from your home and foundation.
+                </li>
+
+                <li>
+                  Make sure that you and your family are as prepared as possible
+                  in the event a flood occurs.
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <h2 class="accordion-header">
+            <button
+              class="accordion-button collapsed"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#panelsStayOpen-collapseTwo"
+              aria-expanded="false"
+              aria-controls="panelsStayOpen-collapseTwo"
+            >
+              <strong
+                >Be prepared to follow any plans you have made to deal with
+                flooding in your area such as:</strong
+              >
+            </button>
+          </h2>
+          <div
+            id="panelsStayOpen-collapseTwo"
+            class="accordion-collapse collapse"
+          >
+            <div class="accordion-body">
+              <ul>
+                <li>
+                  Have a plan for your family and pets in case you need to
+                  evacuate.
+                </li>
+
+                <li>
+                  Have a 72-hour emergency kit ready with food, water,
+                  medications, and other essentials.
+                </li>
+
+                <li>Report any flooding or drainage issues</li>
+
+                <li>
+                  Moving cars, pets, food, valuables and important documents to
+                  safety.
+                </li>
+
+                <li>Putting flood protection equipment in place</li>
+
+                <li>
+                  Turning off gas, electricity and water supplies if it’s safe
+                  to do so
+                </li>
+
+                <li>Evacuating your home</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <h2 class="accordion-header">
+            <button
+              class="accordion-button collapsed"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#panelsStayOpen-collapseThree"
+              aria-expanded="false"
+              aria-controls="panelsStayOpen-collapseThree"
+            >
+              <strong> Staying safe during heavy rainfall: </strong>
+            </button>
+          </h2>
+          <div
+            id="panelsStayOpen-collapseThree"
+            class="accordion-collapse collapse"
+          >
+            <div class="accordion-body">
+              <ul>
+                <li>Wear protective clothing and seek indoor shelter.</li>
+                <li>
+                  Stay away from windows and doors during heavy rain and strong
+                  winds.
+                </li>
+                <li>
+                  Avoid roadway underpasses, drainage ditches, low lying areas
+                  and areas where water collects – they can unexpectedly flood
+                  or overflow.
+                </li>
+                <li>
+                  Avoid driving in heavy rain due to poor visibility. If
+                  possible, park and wait until the rain has slowed or stopped
+                  to continue your journey.
+                </li>
+                <li>
+                  Do not try to drive across a flooded road. Water may be deeper
+                  and stronger than it appears and may contain debris, sharp or
+                  dangerous objects, pot holes or electrical wires.
+                </li>
+                <li>
+                  Vehicles can become unstable or even swept away if caught up
+                  in fast flowing or pooling flood waters. It only takes a few
+                  inches of water to displace a vehicle.
+                </li>
+                <li>Stay away from power lines or electrical wires.</li>
+                <li>
+                  Monitor alerts and weather reports for flash flood warnings
+                  and updates.
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row row-cols-2 row-cols-md-3 g-4">
+    <%if(rainDetails && rainDetails.length > 0){%>
+    <div class="card text-body w-100">
+      <div class="card-body p-2">
+        <h3 class="card-title text-center mt-2">
+          FOLLOWING ARE THE RAINY DAYS IN THE NEXT TWO WEEKS :-
+        </h3>
+      </div>
+    </div>
+    <% rainDetails.forEach((rainDetail) => { %>
+    <div class="col">
+      <div class="card text-body" style="border-radius: 35px">
+        <div class="card-body p-4">
+          <div class="d-flex">
+            <h6 class="flex-grow-1"><%=city%></h6>
+            <h6><%=rainDetail.date%></h6>
+          </div>
+
+          <div class="d-flex flex-column text-center mt-1 mb-2">
+            <h6 class="display-6 mb-0 font-weight-bold">
+              <%=rainDetail.precipitation_sum%>
+            </h6>
+            <span class="fw-bold fs-6"><%=rainDetail.status%></span>
+          </div>
+
+          <div class="d-flex align-items-center">
+            <div class="flex-grow-1" style="font-size: 1rem">
+              <table>
+                <tr>
+                  <td>
+                    <div>
+                      <i class="fas fa-wind fa-fw" style="color: #868b94"></i>
+                      <span class="ms-1"> Rain Sum:</span>
+                    </div>
+                  </td>
+                  <td>
+                    <div>
+                      <span class="ms-1"> <%=rainDetail.rain_sum%> mm </span>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <div>
+                      <i class="fas fa-tint fa-fw" style="color: #868b94"></i>
+                      <span class="ms-1"> Shower Sum:</span>
+                    </div>
+                  </td>
+                  <td>
+                    <div>
+                      <span class="ms-1"> <%=rainDetail.showers_sum%> mm</span>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <div>
+                      <i class="fas fa-sun fa-fw" style="color: #868b94"></i>
+                      <span class="ms-1"> Rain Hours:</span>
+                    </div>
+                  </td>
+                  <td>
+                    <div>
+                      <span class="ms-1">
+                        <%=rainDetail.precipitation_hours%> mm
+                      </span>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <div>
+                      <i class="fas fa-sun fa-fw" style="color: #868b94"></i>
+                      <span class="ms-1"> Probability: </span>
+                    </div>
+                  </td>
+                  <td>
+                    <div>
+                      <span class="ms-1">
+                        <%=rainDetail.precipitation_probability_max%> mm
+                      </span>
+                    </div>
+                  </td>
+                </tr>
+              </table>
+            </div>
+            <div>
+              <img
+                src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-weather/ilu1.webp"
+                width="100px"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <%})%> <%} else {%>
+
+    <div class="card text-body w-100">
+      <div class="card-body p-4">
+        <h3 class="card-title text-center">NO RAIN IN THE NEXT TWO WEEKS</h3>
+      </div>
+    </div>
+
+    <%}%>
+  </div>
+</div>
